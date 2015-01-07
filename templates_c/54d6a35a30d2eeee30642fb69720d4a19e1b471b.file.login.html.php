@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-07 13:20:53
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-07 18:34:29
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
     array (
       0 => 'templates\\base.html',
-      1 => 1420608038,
+      1 => 1420626868,
       2 => 'file',
     ),
   ),
@@ -82,7 +82,7 @@ function checkuserlogin(){
 		success:function(data){
 			if(0==data){
 				var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-				'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
+				'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-log-in"></span>登陆 </a>'+
 				'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
 				$('#top').html(html);
 				window.location.href="/login";
@@ -104,7 +104,7 @@ function checkuserlogin(){
 				},
 				error:function(data){
 					var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-					'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
+					'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-log-in"></span>登陆 </a>'+
 					'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
 					$('#top').html(html);
 					window.location.href="/login";
@@ -113,7 +113,7 @@ function checkuserlogin(){
 		},
 		error:function(data){
 			var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-			'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
+			'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-log-in"></span>登陆 </a>'+
 			'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
 			$('#top').html(html);
 		},
@@ -124,7 +124,7 @@ function checkuserlogin(){
 	<input type="hidden" id="staffid"/>
 	<div class="top" id="top">
 		<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> 
-		<a style="margin-right:40px;" class="menu-right" href="/login">登陆 </a>
+		<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-log-in"></span> 登陆 </a>
 		<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>
 	</div>
 	
