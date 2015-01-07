@@ -1,0 +1,214 @@
+{!extends file='layout.html'!} {!block name=main!}
+<script src="/static/js/baiduTemplate.js"></script>
+<link href="/static/css/buybook.css" rel="stylesheet">
+<script>
+
+function add2car(bookid){
+	$.ajax({
+		type:"POST",
+		url:"{!$api_url!}"+"/letsgo/Bookcar",
+		dataType:"json",
+		data:{
+			bookid:bookid,
+		    staffid:101,
+		    type:"new"
+		},
+		success:function(data){
+			if(data.result ==0){
+				var bt=baidu.template;
+				var html=bt('t:bookcar_result',data);
+				$("#bookcarresult").html(html);
+			}
+		},
+		error:function(data){
+			alert("出错了，请联系系统管理员");
+		},
+	});
+}
+
+function deletefromcar(bookid){
+	$.ajax({
+		type:"POST",
+		url:"{!$api_url!}"+"/letsgo/Bookcar",
+		dataType:"json",
+		data:{
+			bookid:bookid,
+		    staffid:101,
+		    type:"delete",
+		},
+		success:function(data){
+			if(data.result ==0){
+				var bt=baidu.template;
+				var html=bt('t:bookcar_result',data);
+				$("#bookcarresult").html(html);
+			}
+		},
+		error:function(data){
+			alert("出错了，请联系系统管理员");
+		},
+	});
+}
+
+$(document).ready(function(){
+	$.ajax({
+		type:"GET",
+		url:"{!$api_url!}"+"/letsgo/bookcars",
+		dataType:"json",
+		data:{
+			staffid:101,
+		},
+		success:function(data){
+			if(data.result ==0){
+				var bt=baidu.template;
+				var html=bt('t:bookcar_result',data);
+				$("#bookcarresult").html(html);
+			}
+		},
+		error:function(data){
+			alert("出错了，请联系系统管理员");
+		},
+	});
+	
+	$("#nameclick").click(function(){
+		$("#submit").text("按名称搜索");
+	});
+
+	$("#isbnclick").click(function(){
+		$("#submit").text("按ISBN搜索");
+	});
+
+	$("#submit").click(function(){
+		if("按ISBN搜索"==$("#submit").text()){
+			$.ajax({
+				type:"GET",
+				url:"{!$api_url!}"+"/book",
+				dataType:"json",
+				data:{
+					q:$("#search").val(),
+				    type:"ISBN"
+				},
+				success:function(data){
+					if(data.result ==0){
+						var bt=baidu.template;
+						var html=bt('t:search_result',data);
+						$("#result").html(html);
+					}
+				},
+				error:function(data){
+					alert("出错了，请联系系统管理员");
+				},
+			});
+		}else{
+			$.ajax({
+				type:"GET",
+				url:"{!$api_url!}"+"/book",
+				dataType:"json",
+				data:{
+					q:$("#search").val().replace(/ /g,"#"),
+				    type:"123",
+				    dataType : "json",
+				},
+				success:function(data){
+					if(data.result ==0){
+						var bt=baidu.template;
+						var html=bt('t:search_result',data);
+						$("#result").html(html);
+					}
+				},
+				error:function(data){
+					alert("出错了，请联系系统管理员");
+				},
+			});
+		}
+	});
+});
+</script>
+
+	<div class="row" style="text-align: center">
+		<div id="box" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="title">
+				<p>教材预定</p>
+			</div>
+		<div class="col-lg-6 col-md-6">
+		    <div class="input-group">
+		      <input type="text" class="form-control" id="search">
+		      <div class="input-group-btn">
+	            <button id="submit" type="button" class="btn btn-default" tabindex="-1">按名称搜索</button>
+	            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+	              <span class="caret"></span>
+	            </button>
+	            <ul class="dropdown-menu dropdown-menu-right" role="menu" >
+	              <li><a id="nameclick" href="#">按名称搜索</a></li>
+	              <li><a id="isbnclick" href="#">按ISBN搜索</a></li>
+	            </ul>
+	          </div>
+		    </div><!-- /input-group -->
+			<div class="bookbox" id="result">
+				
+			</div>
+		  </div><!-- /.col-lg-6 -->
+		  <div class="col-lg-6 col-md-6 dpb">
+		      <div class="panel panel-default car">
+				<div class="panel-heading">
+		    		<h3 class="panel-title">我的购物车</h3>
+				</div>
+				<div class="panel-body" >
+					<table class="table"  id="bookcar">
+					<thead>
+			    		<tr>
+			    			<th>书名</th>
+			    			<th>出版社</th>
+			    			<th>定价</th>
+			    			<th>操作</th>
+			    		</tr>
+			    		</thead>
+			    		<tbody id="bookcarresult">
+
+			    		</tbody>
+		    		</table>
+		    	<button type="button" class="btn 	btn-info"  onclick="window.location='/book/order'">生成订单</button>
+		  		</div>
+			  </div>
+		  </div>
+		</div>
+	</div>
+<script id='t:search_result' type="text/template">
+<!-- 模板部分 -->
+<% for(var i = 0; i<data.length;i++){%>
+				<div class="row mbookinbox">
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<img src="<%=data[i].imgpath%>" alt="" class="pic" />
+					</div>
+					<div class="col-lg-7 col-md-7 col-sm-7">
+						<p class="booktitle">
+							<span ><%=data[i].name%></span>
+						</p>
+						<p class="search_book_author" > 
+						<span class="search_now_price">&yen;<%=data[i].fixedPrice%></span>
+						<span><%=data[i].author%></span>
+						</p>
+						<p class="search_book_author" > 
+						<span > <%=data[i].isbn%></span>
+						<span>  /<%=data[i].press%></span>
+						</p>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<button type="button" class="btn btn-info flagsold  btn-block" onclick="add2car('<%=data[i].id%>')">加入购物车</button>
+					</div>
+				</div>
+<%}%>
+<!-- 模板结束 -->   
+</script>
+<script id='t:bookcar_result' type="text/template">
+<!-- 模板部分 -->
+<% for(var i = 0; i<data.length;i++){%>
+	<tr>
+		<td><%=data[i].name%></td>
+		<td><%=data[i].press%></td>
+		<td><%=data[i].fixedPrice%></td>
+		<td><button class="btn btn-mini btn-default" onclick="deletefromcar('<%=data[i].bookid%>')">删除</button></td>
+	</tr> 
+<%}%>
+<!-- 模板结束 -->   
+</script>
+{!/block!}

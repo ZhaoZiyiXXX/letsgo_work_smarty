@@ -1,0 +1,78 @@
+{!extends file='base.html'!} {!block name=base!}
+<script src="/static/js/md5.js"></script>
+<script>
+$(document).ready(function(){
+	$('#submit').click(function(){
+		$.ajax({
+			type:"POST",
+			url:"{!$api_url!}"+"/Letsgo/login",
+			dataType:"json",
+			data:{
+				staffid:$('#username').val(),
+				password:hex_md5($('#password').val()),
+			},
+			success:function(data){
+				if(data.data.staffid){
+					$.ajax({
+						type:"POST",
+						url:"/session.php",
+						data:{
+							action:"set",
+							staffid:data.data.staffid,
+						},
+						success:function(data){
+							window.location.href = "/";
+						},
+						error:function(data){
+							alert("登陆出现异常，请重试1"+data);
+						},
+					});
+				}else{
+					alert("登陆出现异常，请重试2");
+				}
+			},
+			error:function(data){
+				alert("登陆出现异常，请重试3");
+			},
+		});
+		return false;
+	});
+});
+</script>
+<style>
+.loginbox{
+	min-height:300px;
+	margin:100px auto 0 auto;
+}
+.loginbtn{
+	min-width:150px;
+}
+</style>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3" >
+		<div class="loginbox">
+			<div class="row">
+	   			<form class="form-horizontal">
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-md-2 control-label">工号</label>
+				    <div class="col-md-8">
+				      <input type="text" class="form-control" id="username" name="username" placeholder="工号">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword3" class="col-md-2 control-label">密码</label>
+				    <div class="col-md-8">
+				      <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				      <button type="submit" id="submit" class="btn btn-default loginbtn">登陆</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+	   	</div>
+	</div>
+</div>
+{!/block!}

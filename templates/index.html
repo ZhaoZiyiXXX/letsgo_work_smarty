@@ -1,0 +1,58 @@
+{!extends file='layout.html'!} {!block name=main!}
+<script src="/static/js/baiduTemplate.js"></script>
+<script>
+$(document).ready(function(){
+	checkuserlogin();
+	$.ajax({
+		type:"GET",
+		url:"{!$api_url!}"+"/letsgo/notices",
+		dataType:"json",
+		data:{},
+		success:function(data){
+			if(data.result ==0){
+				var bt=baidu.template;
+				var html=bt('t:search_result',data);
+				$("#result").html(html);
+			}
+		},
+		error:function(data){
+		},
+	});
+});
+</script>
+<style>
+th,td{
+	font-size:14px;
+	text-align:center;
+}
+
+</style>
+	<div class="row" style="text-align: center">
+		<div id="box" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="title">
+				<p>公告栏</p>
+			</div>
+			<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="title">发布时间</th>
+					<th>主题</th>
+				</tr>
+			</thead>
+			<tbody id="result">
+			</tbody>
+
+			</table>
+		</div>
+	</div>
+<script id='t:search_result' type="text/template">
+<!-- 模板部分 -->
+<% for(var i = 0; i<data.length;i++){%>
+				<tr>
+					<td><%=data[i].releaseTime%></td>
+					<td class="tal"><%=data[i].title%></td>
+				</tr>
+<%}%>
+<!-- 模板结束 -->   
+</script>
+{!/block!}

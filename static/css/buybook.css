@@ -1,0 +1,70 @@
+.car{
+	display:block;
+	width:100%;
+	top:100px;
+	right:5px;
+	z-index:9999;
+}
+
+.car h3{
+	font-size:14px;
+}
+
+.car .panel-body{
+	font-size:10px;
+	min-height:100px;
+}
+
+.car .panel-body table th{
+	font-size:10px;
+}
+
+.car .panel-body table td{
+	font-size:10px;
+}
+
+.btn-info{
+	font-size:12px;
+	padding:0px 15px 5px 15px;
+	line-height:25px;
+	height:25px;
+	display:block;
+	margin:0px auto;
+}
+.bookbox{
+	margin-top:20px;
+}
+
+.booktitle{
+	font-size:12px;
+	font-weight:bold;
+	padding-top:3px;
+}
+.mbookinbox{
+	border: 1px solid #ccc;
+	padding:10px;
+	margin:-1px 0px;
+}
+.flagsold{
+	min-width: 100px;
+	min-height:30px;
+	margin-top:30px;
+}
+
+.pic {
+	width: 60px;
+	height:80px;
+	margin-bottom: 5px;
+}
+.search_now_price {
+	font-family: arial,'Hiragino Sans GB',"Simsun";
+	color: #FA5000;
+	font-size: 12px;
+	overflow: hidden;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.search_book_author{
+	font-size:11px;
+}
