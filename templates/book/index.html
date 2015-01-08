@@ -10,7 +10,7 @@ function add2car(bookid){
 		dataType:"json",
 		data:{
 			bookid:bookid,
-		    staffid:101,
+		    staffid:$('#staffid').val(),
 		    type:"new"
 		},
 		success:function(data){
@@ -33,7 +33,7 @@ function deletefromcar(bookid){
 		dataType:"json",
 		data:{
 			bookid:bookid,
-		    staffid:101,
+		    staffid:$('#staffid').val(),
 		    type:"delete",
 		},
 		success:function(data){
@@ -55,7 +55,7 @@ $(document).ready(function(){
 		url:"{!$api_url!}"+"/letsgo/bookcars",
 		dataType:"json",
 		data:{
-			staffid:101,
+			staffid:$('#staffid').val(),
 		},
 		success:function(data){
 			if(data.result ==0){
