@@ -51,7 +51,7 @@ $(document).ready(function(){
 		}
 		$.ajax({
 			type:"POST",
-			url:API_ROOT+"Letsgo/resetpassword.php",
+			url:API_ROOT+"/Letsgo/resetpassword",
 			dataType:"json",
 			data:{
 				staffid:$('#fusername').val(),
@@ -68,7 +68,7 @@ $(document).ready(function(){
 					return;
 				}
 				alert("重置成功，请重新登陆");
-				window.location.href = "/Login";
+				window.location.href = "/login";
 			},
 			error:function(data){
 				alert("出现异常，请重试"+data);

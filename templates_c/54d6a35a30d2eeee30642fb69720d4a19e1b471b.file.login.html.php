@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 17:28:28
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 17:33:36
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420793765,
+      1 => 1420796015,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -112,7 +112,8 @@ $(document).ready(function(){
 		}
 		$.ajax({
 			type:"POST",
-			url:API_ROOT+"Letsgo/resetpassword.php",
+			url:API_ROOT+"/Letsgo/resetpassword",
+			dataType:"json",
 			data:{
 				staffid:$('#fusername').val(),
 				tel:$('#ftel').val(),
@@ -128,7 +129,7 @@ $(document).ready(function(){
 					return;
 				}
 				alert("重置成功，请重新登陆");
-				window.location.href = "/Login";
+				window.location.href = "/login";
 			},
 			error:function(data){
 				alert("出现异常，请重试"+data);
