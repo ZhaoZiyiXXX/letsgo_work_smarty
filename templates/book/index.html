@@ -48,9 +48,7 @@ function deletefromcar(bookid){
 		},
 	});
 }
-
-$(document).ready(function(){
-	checkuserlogin();
+function getbookcar(){
 	$.ajax({
 		type:"GET",
 		url:"{!$api_url!}"+"/letsgo/bookcars",
@@ -69,6 +67,10 @@ $(document).ready(function(){
 			alert("出错了，请联系系统管理员");
 		},
 	});
+}
+$(document).ready(function(){
+	checkuserlogin();
+	setTimeout(getbookcar,300); 
 	
 	$("#nameclick").click(function(){
 		$("#submit").text("按名称搜索");

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 16:03:46
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 16:39:35
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420608050,
+      1 => 1420792774,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -62,7 +62,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <script src="/static/js/md5.js"></script>
 <script>
 $(document).ready(function(){
-	$('#submit').click(function(){
+	$('#login').click(function(){
 		$.ajax({
 			type:"POST",
 			url:"<?php echo $_smarty_tpl->tpl_vars['api_url']->value;?>
@@ -98,6 +98,11 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	
+	$('#forgetpassword').click(function(){
+		$('#forgetpasswordmodal').modal("show");
+		return false;
+	});
 });
 </script>
 <style>
@@ -106,11 +111,15 @@ $(document).ready(function(){
 	margin:100px auto 0 auto;
 }
 .loginbtn{
-	min-width:150px;
+	min-width:100px;
+}
+
+#forgetpasswordmodal input{
+	margin:10px auto;
 }
 </style>
 <div class="row">
-	<div class="col-md-6 col-md-offset-3" >
+	<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" >
 		<div class="loginbox">
 			<div class="row">
 	   			<form class="form-horizontal">
@@ -127,8 +136,10 @@ $(document).ready(function(){
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <div class="col-sm-offset-2 col-sm-10">
-				      <button type="submit" id="submit" class="btn btn-default loginbtn">登陆</button>
+				    <div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3 col-sm-offset-2 col-sm-10 col-xs-12">
+				      <button type="submit" id="login" class="btn btn-default loginbtn">登陆</button>
+				      <button type="submit" id="register" class="btn btn-default loginbtn">注册</button>
+				      <button type="submit" id="forgetpassword" class="btn btn-default loginbtn">忘记密码</button>
 				    </div>
 				  </div>
 				</form>
@@ -136,6 +147,21 @@ $(document).ready(function(){
 	   	</div>
 	</div>
 </div>
+<div class="modal fade" id="forgetpasswordmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      		<input type="text" class="form-control" id="fusername" placeholder="工号">
+      		<input type="text" class="form-control" id="ftel" placeholder="手机">
+			<input type="password" class="form-control" id="password1" placeholder="新密码">
+			<input type="password" class="form-control" id="password2" placeholder="再次输入新密码">
+      </div>
+      <div class="modal-footer">
+        <button id="resetpassword" type="button" class="btn btn-primary" >重置密码</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 </body>
 
