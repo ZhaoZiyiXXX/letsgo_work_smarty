@@ -58,6 +58,14 @@ $(document).ready(function(){
 				password:hex_md5($('#password1').val()),
 			},
 			success:function(data){
+				if(data.result == 1006){
+					alert("手机号和工号不匹配");
+					return;
+				}
+				if(data.result == 1000){
+					alert("重置失败");
+					return;
+				}
 				alert("重置成功，请重新登陆");
 				window.location.href = "/Login";
 			},
