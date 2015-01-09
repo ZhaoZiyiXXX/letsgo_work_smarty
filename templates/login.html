@@ -52,6 +52,7 @@ $(document).ready(function(){
 		$.ajax({
 			type:"POST",
 			url:API_ROOT+"Letsgo/resetpassword.php",
+			dataType:"json",
 			data:{
 				staffid:$('#fusername').val(),
 				tel:$('#ftel').val(),

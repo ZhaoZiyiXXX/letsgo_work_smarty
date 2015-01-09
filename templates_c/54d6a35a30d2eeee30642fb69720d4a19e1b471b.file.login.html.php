@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 16:39:35
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 17:28:28
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420792774,
+      1 => 1420793765,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -101,6 +101,43 @@ $(document).ready(function(){
 	
 	$('#forgetpassword').click(function(){
 		$('#forgetpasswordmodal').modal("show");
+		return false;
+	});
+	
+	$('#resetpassword').click(function(){
+		if($('#password1').val()!=$('#password2').val()){
+			alert("两次输入的密码不一致");
+			$('#password2').focus();
+			return;
+		}
+		$.ajax({
+			type:"POST",
+			url:API_ROOT+"Letsgo/resetpassword.php",
+			data:{
+				staffid:$('#fusername').val(),
+				tel:$('#ftel').val(),
+				password:hex_md5($('#password1').val()),
+			},
+			success:function(data){
+				if(data.result == 1006){
+					alert("手机号和工号不匹配");
+					return;
+				}
+				if(data.result == 1000){
+					alert("重置失败");
+					return;
+				}
+				alert("重置成功，请重新登陆");
+				window.location.href = "/Login";
+			},
+			error:function(data){
+				alert("出现异常，请重试"+data);
+			},
+		});
+	});
+	
+	$('#register').click(function(){
+		//$('#forgetpasswordmodal').modal("show");
 		return false;
 	});
 });
