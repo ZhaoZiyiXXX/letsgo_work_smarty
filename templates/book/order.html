@@ -2,59 +2,6 @@
 <script src="/static/js/baiduTemplate.js"></script>
 <link href="/static/css/buybook.css" rel="stylesheet">
 <script>
-function deletefromcar(bookid){
-	$.ajax({
-		type:"POST",
-		url:"{!$api_url!}"+"/letsgo/Bookcar",
-		dataType:"json",
-		data:{
-			bookid:bookid,
-		    staffid:$('#staffid').val(),
-		    type:"delete",
-		},
-		success:function(data){
-			if(data.result ==0){
-				var bt=baidu.template;
-				var html=bt('t:search_result',data);
-				$("#result").html(html);
-			}
-		},
-		error:function(data){
-			alert("出错了，请联系系统管理员");
-		},
-	});
-}
-function getbookcarinfo(){
-	$.ajax({
-		type:"GET",
-		url:"{!$api_url!}"+"/letsgo/bookcars",
-		dataType:"json",
-		data:{
-			staffid:$('#staffid').val(),
-		},
-		success:function(data){
-			if(data.result ==0){
-				var i;
-				var temp;
-				for(i = 0;i<data.data.length;i++){
-					temp +="<tr><td>"+data.data[i].name+"</td><td>"+data.data[i].author+
-					"</td><td>"+data.data[i].press+"</td><td>"+data.data[i].fixedPrice+
-					"</td><td class=\"test\" id=\"bookid"+data.data[i].bookid+"\">0</td></tr>";
-					$('#orderdetails').html(temp);
-				}
-				var bt=baidu.template;
-				var html=bt('t:search_result',data);
-				$("#result").html(html);
-				$(".count").on('input',function(e){
-					$('#'+ "bookid"+ $(this).attr('id')).html($(this).val());
-				});
-			}
-		},
-		error:function(data){
-			alert("出错了，请联系系统管理员");
-		},
-	});
-}
 $(document).ready(function(){
 	checkuserlogin();
 	setTimeout(getbookcarinfo,300); 
@@ -101,8 +48,60 @@ $(document).ready(function(){
 			},
 		});
 	});
-
 });
+function deletefromcar(bookid){
+	$.ajax({
+		type:"POST",
+		url:"{!$api_url!}"+"/letsgo/Bookcar",
+		dataType:"json",
+		data:{
+			bookid:bookid,
+		    staffid:$('#staffid').val(),
+		    type:"delete",
+		},
+		success:function(data){
+			if(data.result ==0){
+				var bt=baidu.template;
+				var html=bt('t:search_result',data);
+				$("#result").html(html);
+			}
+		},
+		error:function(data){
+			alert("出错了，请联系系统管理员");
+		},
+	});
+}
+function getbookcarinfo(){
+	$.ajax({
+		type:"GET",
+		url:API_ROOT+"/letsgo/bookcars",
+		dataType:"json",
+		data:{
+			staffid:$('#staffid').val(),
+		},
+		success:function(data){
+			if(data.result ==0){
+				var i;
+				var temp;
+				for(i = 0;i<data.data.length;i++){
+					temp +="<tr><td>"+data.data[i].name+"</td><td>"+data.data[i].author+
+					"</td><td>"+data.data[i].press+"</td><td>"+data.data[i].fixedPrice+
+					"</td><td class=\"test\" id=\"bookid"+data.data[i].bookid+"\">0</td></tr>";
+					$('#orderdetails').html(temp);
+				}
+				var bt=baidu.template;
+				var html=bt('t:search_result',data);
+				$("#result").html(html);
+				$(".count").on('input',function(e){
+					$('#'+ "bookid"+ $(this).attr('id')).html($(this).val());
+				});
+			}
+		},
+		error:function(data){
+			alert("出错了，请联系系统管理员");
+		},
+	});
+}
 </script>
 <style>
 #orderdetails td{

@@ -50,6 +50,7 @@ function deletefromcar(bookid){
 }
 
 $(document).ready(function(){
+	checkuserlogin();
 	$.ajax({
 		type:"GET",
 		url:"{!$api_url!}"+"/letsgo/bookcars",
