@@ -2,7 +2,6 @@
 <script src="/static/js/baiduTemplate.js"></script>
 <link href="/static/css/buybook.css" rel="stylesheet">
 <script>
-
 function add2car(bookid){
 	$.ajax({
 		type:"POST",
@@ -88,13 +87,16 @@ $(document).ready(function(){
 				dataType:"json",
 				data:{
 					q:$("#search").val(),
-				    type:"ISBN"
+				    type:"ISBN",
 				},
 				success:function(data){
-					if(data.result ==0){
+					if(data.result !=0){
 						var bt=baidu.template;
 						var html=bt('t:search_result',data);
 						$("#result").html(html);
+					}else{
+						$('#modaltitle').text("没有查找到你要的图书，请手动添加");
+						$('#addbookinfo').modal('show');
 					}
 				},
 				error:function(data){
@@ -109,7 +111,6 @@ $(document).ready(function(){
 				data:{
 					q:$("#search").val().replace(/ /g,"#"),
 				    type:"123",
-				    dataType : "json",
 				},
 				success:function(data){
 					if(data.result ==0){
@@ -123,6 +124,57 @@ $(document).ready(function(){
 				},
 			});
 		}
+	});
+	
+	$('#addnewbookinfo').click(function(){
+		if($('#newbook_name').val() == ""){
+			alert("书名不得为空！");
+			$('#newbook_name').focus();
+			return false;
+		}
+		if($('#newbook_author').val() == ""){
+			alert("作者不得为空！");
+			$('#newbook_author').focus();
+			return false;
+		}
+		if($('#newbook_press').val() == ""){
+			alert("出版社不得为空！");
+			$('#newbook_press').focus();
+			return false;
+		}
+		if($('#newbook_isbn').val() == ""){
+			alert("ISBN不得为空！");
+			$('#newbook_isbn').focus();
+			return false;
+		}
+		if($('#newbook_fixedPrice').val() == ""){
+			alert("定价不得为空！");
+			$('#newbook_fixedPrice').focus();
+			return false;
+		}
+		
+		$.ajax({
+			type:"POST",
+			url:"{!$api_url!}"+"/book",
+			dataType:"json",
+			data:{
+				name:$('#newbook_name').val(),
+				author:$('#newbook_author').val(),
+				press:$('#newbook_press').val(),
+				isbn:$('#newbook_isbn').val(),
+				fixedPrice:$('#newbook_fixedPrice').val(),
+			},
+			success:function(data){
+				if(data.result ==0){
+					alert("添加成功！请直接输入名字查询");
+					$('#addbookinfo').modal('hide');
+				}
+			},
+			error:function(data){
+				alert("网络异常，请稍后重试！");
+			},
+		});
+		return false;
 	});
 });
 </script>
@@ -144,6 +196,7 @@ $(document).ready(function(){
 	              <li><a id="nameclick" href="#">按名称搜索</a></li>
 	              <li><a id="isbnclick" href="#">按ISBN搜索</a></li>
 	            </ul>
+	            <button id="newbook" type="button" class="btn btn-default"  data-toggle="modal" data-target="#addbookinfo">新增图书信息</button>
 	          </div>
 		    </div><!-- /input-group -->
 			<div class="bookbox" id="result">
@@ -169,7 +222,7 @@ $(document).ready(function(){
 
 			    		</tbody>
 		    		</table>
-		    	<button type="button" class="btn 	btn-info"  onclick="window.location='/book/order'">生成订单</button>
+		    	<button type="button" class="btn 	btn-info btn-car"  onclick="window.location='/book/order'">生成订单</button>
 		  		</div>
 			  </div>
 		  </div>
@@ -214,4 +267,24 @@ $(document).ready(function(){
 <%}%>
 <!-- 模板结束 -->   
 </script>
+<div class="modal fade"  id="addbookinfo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <h3 id="modaltitle" class="modal-title newbookinput">添加新图书信息</h3>
+       <p>以下信息务必全部填写，不得留空，可以到京东、亚马逊、当当等商城查询</p>
+      </div>
+      <div class="modal-body">
+      		<input id="newbook_name"  type="text" class="form-control newbookinput"   placeholder="书名" />
+      		<input id="newbook_author"  type="text" class="form-control newbookinput"   placeholder="作者" />
+      		<input id="newbook_press"  type="text" class="form-control newbookinput"   placeholder="出版社" />
+      		<input id="newbook_isbn"  type="text" class="form-control newbookinput"  placeholder="ISBN" />
+      		<input id="newbook_fixedPrice"  type="text" class="form-control newbookinput"   placeholder="定价" />
+      </div>
+      <div class="modal-footer">
+       <button id="addnewbookinfo" class="btn btn-info">确定添加</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {!/block!}

@@ -23,7 +23,7 @@
 	font-size:10px;
 }
 
-.btn-info{
+.btn-car{
 	font-size:12px;
 	padding:0px 15px 5px 15px;
 	line-height:25px;
@@ -67,4 +67,12 @@
 
 .search_book_author{
 	font-size:11px;
+}
+
+#newbook{
+	margin:0 20px;
+}
+
+.newbookinput{
+	margin:10px auto;
 }
