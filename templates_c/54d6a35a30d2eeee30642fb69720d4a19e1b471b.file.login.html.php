@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 17:33:36
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 21:29:35
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420796015,
+      1 => 1420896551,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -138,8 +138,42 @@ $(document).ready(function(){
 	});
 	
 	$('#register').click(function(){
-		//$('#forgetpasswordmodal').modal("show");
+		$('#modalregister').modal("show");
 		return false;
+	});
+	
+	$('#registersubmit').click(function(){
+		 if($("#password3").val() !=$("#password4").val()){
+			  alert("两次输入的密码不一致");
+			  $("#password4").focus();
+			  return;
+		  }
+		  $.ajax({
+             type: "POST",
+             url: API_ROOT+"/Letsgo/user",
+             dataType: "json",
+			  data:{
+                 name:$("#name").val(),
+                 password:hex_md5($("#password3").val()),
+                 email:$("#email").val(),
+                 tel:$("#tel").val(),
+                 college:$("#college").val(),
+                 campus:$("#campus").val(),
+                 academy:$("#academy").val(),
+                 major:$("#major").val(),
+                 gender:$("#gender").val(),
+                 qq:$("#qq").val(),
+                 birth:$("#birth").val(),
+                 nativePlace:$("#nativePlace").val(),
+             },
+             success: function(data){
+                 if(data.result == 0){
+                     alert("注册成功!您的工号是"+data.data.staffid+",请牢记该工号！\r\n建议您截图保存");
+                 }else{
+                     alert("注册失败，请确认是否将所有信息填写完整");
+                 }
+             },
+         });
 	});
 });
 </script>
@@ -152,7 +186,7 @@ $(document).ready(function(){
 	min-width:100px;
 }
 
-#forgetpasswordmodal input{
+.modal-body input{
 	margin:10px auto;
 }
 </style>
@@ -196,6 +230,36 @@ $(document).ready(function(){
       </div>
       <div class="modal-footer">
         <button id="resetpassword" type="button" class="btn btn-primary" >重置密码</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade"  id="modalregister">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <h3 class="modal-title">新用户注册</h3>
+      </div>
+      <div class="modal-body">
+	      <input type="text" class="form-control" id="name" name="name" placeholder="姓名"/>
+	      <input type="password" class="form-control" id="password3" name="password3" placeholder="密码"/>
+	      <input type="password" class="form-control"  id="password4" name="password4" placeholder="确认密码"/>
+	      <input type="email" class="form-control" id="email" name="email" placeholder="邮箱"/>
+	      <input type="text" class="form-control"  id="tel" name="tel" placeholder="手机"/>
+		   <select class="form-control" id="gender" name="gender" >
+		    <option>男</option>
+		    <option>女</option>
+		   </select>
+	      <input type="text" class="form-control" id="birth" name="birth" placeholder="生日"/>
+	      <input type="text" class="form-control" id="nativePlace" name="nativePlace" placeholder="籍贯"/>
+	      <input type="text" class="form-control" id="qq" name="qq" placeholder="QQ"/>
+	      <input type="text" class="form-control" id="college" name="college" placeholder="学校"/>
+	      <input type="text" class="form-control" id="campus" name="campus" placeholder="校区"/>
+	      <input type="text" class="form-control" id="academy" name="academy" placeholder="学院"/>
+	      <input type="text" class="form-control" id="major" name="major" placeholder="专业"/>
+      </div>
+      <div class="modal-footer">
+       <button type="submit" class="btn btn-default loginbtn" id="registersubmit">确认注册</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
