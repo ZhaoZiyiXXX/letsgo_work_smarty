@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 21:32:12
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 22:02:07
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420896728,
+      1 => 1420898368,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -156,7 +156,7 @@ $(document).ready(function(){
                  name:$("#name").val(),
                  password:hex_md5($("#password3").val()),
                  email:$("#email").val(),
-                 tel:$("#tel").val(),
+                 telephone:$("#tel").val(),
                  college:$("#college").val(),
                  campus:$("#campus").val(),
                  academy:$("#academy").val(),
@@ -169,6 +169,8 @@ $(document).ready(function(){
              success: function(data){
                  if(data.result == 0){
                      alert("注册成功!您的工号是"+data.data.staffid+",请牢记该工号！\r\n建议您截图保存");
+                 }else if(data.result == 1005){
+                	 alert("你已经注册过了，请直接使用用户名登录，忘记密码请选择重置");
                  }else{
                      alert("注册失败，请确认是否将所有信息填写完整");
                  }
