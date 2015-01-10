@@ -37,14 +37,17 @@ $(document).ready(function(){
 				staffid:$('#staffid').val(),
 			},
 			success:function(data){
-				if(1000 != data.data){
+				if(0 == data.result){
+					alert("订单提交成功！");
 					window.location.href = "/user/order";
+				}else if(1005 == data.result){
+					alert("存在完全相同的订单，请更改订单信息后重新提交");
 				}else{
-					alert("出错了，请在网络状态良好的情况下重试");
+					alert("出错了，请在网络状态良好的情况下重试1");
 				}
 			},
 			error:function(data){
-				alert("出错了，请在网络状态良好的情况下重试");
+				alert("出错了，请在网络状态良好的情况下重试2");
 			},
 		});
 	});
