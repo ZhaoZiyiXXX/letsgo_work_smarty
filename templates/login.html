@@ -108,6 +108,8 @@ $(document).ready(function(){
              success: function(data){
                  if(data.result == 0){
                      alert("注册成功!您的工号是"+data.data.staffid+",请牢记该工号！\r\n建议您截图保存");
+                 }else if(data.result == 1005){
+                	 alert("你已经注册过了，请直接使用用户名登录，忘记密码请选择重置");
                  }else{
                      alert("注册失败，请确认是否将所有信息填写完整");
                  }
