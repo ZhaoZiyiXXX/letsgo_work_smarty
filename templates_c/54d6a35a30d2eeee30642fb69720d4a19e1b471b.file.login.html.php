@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 21:29:35
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 21:32:12
          compiled from "templates\login.html" */ ?>
 <?php /*%%SmartyHeaderCode:819454a35c09f048d5-02077303%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '54d6a35a30d2eeee30642fb69720d4a19e1b471b' => 
     array (
       0 => 'templates\\login.html',
-      1 => 1420896551,
+      1 => 1420896728,
       2 => 'file',
     ),
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
@@ -196,9 +196,9 @@ $(document).ready(function(){
 			<div class="row">
 	   			<form class="form-horizontal">
 				  <div class="form-group">
-				    <label for="inputEmail3" class="col-md-2 control-label">工号</label>
+				    <label for="inputEmail3" class="col-md-2 control-label">用户名</label>
 				    <div class="col-md-8">
-				      <input type="text" class="form-control" id="username" name="username" placeholder="工号">
+				      <input type="text" class="form-control" id="username" name="username" placeholder="请输入工号、手机或者邮箱">
 				    </div>
 				  </div>
 				  <div class="form-group">
