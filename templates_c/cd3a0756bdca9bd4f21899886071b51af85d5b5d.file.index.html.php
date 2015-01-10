@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 20:51:48
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 22:58:13
          compiled from "templates\book\index.html" */ ?>
 <?php /*%%SmartyHeaderCode:2295254a27972345ba6-15766040%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cd3a0756bdca9bd4f21899886071b51af85d5b5d' => 
     array (
       0 => 'templates\\book\\index.html',
-      1 => 1420894307,
+      1 => 1420901892,
       2 => 'file',
     ),
     '7943b5739e6469335dfd7ed5b4e54da5b096b7bf' => 
@@ -303,6 +303,7 @@ $(document).ready(function(){
 				<p>教材预定</p>
 			</div>
 		<div class="col-lg-6 col-md-6">
+			<p style="font-size:0.8em;">按名称搜索不到的图书，请切换到按ISBN搜索模式，仍然搜不到的，请自助新增图书信息</p>
 		    <div class="input-group">
 		      <input type="text" class="form-control" id="search">
 		      <div class="input-group-btn">
