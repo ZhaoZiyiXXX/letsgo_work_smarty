@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-09 16:15:03
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 22:42:24
          compiled from "templates\book\order.html" */ ?>
 <?php /*%%SmartyHeaderCode:1831154a28f6c13b6d1-90408385%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8514149b2ee140e195fe03d0b273fc59a4af7785' => 
     array (
       0 => 'templates\\book\\order.html',
-      1 => 1420791258,
+      1 => 1420900943,
       2 => 'file',
     ),
     '7943b5739e6469335dfd7ed5b4e54da5b096b7bf' => 
@@ -122,6 +122,16 @@ $(document).ready(function(){
 		$('#campus').text($(this).text());
 	});
 	$('#submit').click(function(){
+		$("td.test").each(function(n){
+			if("0" ==$(this).html()){
+				$(this).parent().remove();
+			}
+		  });
+		if($('#orderdetails').html() == ""){
+			alert("请至少填写一个品种的数量！");
+			getbookcarinfo();
+			return;
+		}
 		$('#ordersubmit').modal('show');
 	});
 	
@@ -150,14 +160,17 @@ $(document).ready(function(){
 				staffid:$('#staffid').val(),
 			},
 			success:function(data){
-				if(1000 != data.data){
+				if(0 == data.result){
+					alert("订单提交成功！");
 					window.location.href = "/user/order";
+				}else if(1005 == data.result){
+					alert("存在完全相同的订单，请更改订单信息后重新提交");
 				}else{
-					alert("出错了，请在网络状态良好的情况下重试");
+					alert("出错了，请在网络状态良好的情况下重试1");
 				}
 			},
 			error:function(data){
-				alert("出错了，请在网络状态良好的情况下重试");
+				alert("出错了，请在网络状态良好的情况下重试2");
 			},
 		});
 	});
@@ -243,7 +256,8 @@ p.campus{
 			<div class="title">
 				<p>我的购物车</p>
 			</div>
-			<p>请特别注意：不需要提交的教材请删除，否则订单中会出现数量为0的信息，该问题需要过段时间解决</p>
+			<p>填写数量后点击生成订单，不想加入订单的品种保持数量为空即可。</p>
+			<p style="color:red;font-weight:blod;">二手政治书可以直接提交，其他品种二手书请不要在这里提交，发邮件给752251080@qq.com</p>
 			<div class="bookbox" id="result">
 			</div>
 			<button id="submit" type="submit" class="btn btn-default">生成订单</button>

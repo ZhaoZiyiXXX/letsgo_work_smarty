@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.19, created on 2015-01-07 13:37:17
+<?php /* Smarty version Smarty-3.1.19, created on 2015-01-10 22:10:31
          compiled from "templates\user\order.html" */ ?>
 <?php /*%%SmartyHeaderCode:1576154abc7989388b5-34925089%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5811db6a4e061d23cc5f37d8e87eb9bf0a693f97' => 
     array (
       0 => 'templates\\base.html',
-      1 => 1420608038,
+      1 => 1420790581,
       2 => 'file',
     ),
   ),
@@ -29,10 +29,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.19',
   'unifunc' => 'content_54abc7989b1a40_40591961',
-  'variables' => 
-  array (
-    'api_url' => 0,
-  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54abc7989b1a40_40591961')) {function content_54abc7989b1a40_40591961($_smarty_tpl) {?><!DOCTYPE html>
@@ -59,78 +55,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <script src="/static/js/jquery-1.11.1.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/jquery.easing.1.3.js"></script>
+<script src="/static/js/login.js"></script>
 </head>
-<script>
-function logout(){
-	$.ajax({
-		type:"POST",
-		url:"/session.php",
-		dataType:"json",
-		data:{
-			action:"delete",
-		},
-		success:function(data){
-			window.location.href="/login";
-		},
-		error:function(data){
-			window.location.href="/login";
-		},
-	});
-}
-function checkuserlogin(){
-	$.ajax({
-		type:"GET",
-		url:"/session.php",
-		dataType:"json",
-		data:{
-			action:"get",
-		},
-		success:function(data){
-			if(0==data){
-				var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-				'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
-				'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
-				$('#top').html(html);
-				window.location.href="/login";
-			}
-			$('#staffid').val(data);
-			$.ajax({
-				type:"GET",
-				url:"<?php echo $_smarty_tpl->tpl_vars['api_url']->value;?>
-"+"/Letsgo/user",
-				dataType:"json",
-				data:{
-					staffid:data,
-				},
-				success:function(data){
-					var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-					'<a class="menu-right" onclick="logout()">退出登陆</a>'+
-					'<a class="menu-right" href="/userinfo">欢迎你： '+data.data.name+'</a>';
-					$('#top').html(html);
-				},
-				error:function(data){
-					var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-					'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
-					'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
-					$('#top').html(html);
-					window.location.href="/login";
-				},
-			});
-		},
-		error:function(data){
-			var html = '<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> '+
-			'<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-question-sign"></span>登陆 </a>'+
-			'<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>';
-			$('#top').html(html);
-		},
-	});
-}
-</script>
 <body>
 	<input type="hidden" id="staffid"/>
 	<div class="top" id="top">
 		<a style="margin-left:40px;" class="menu-left" href="/"><span class="glyphicon glyphicon-home"></span> 首 页</a> 
-		<a style="margin-right:40px;" class="menu-right" href="/login">登陆 </a>
+		<a style="margin-right:40px;" class="menu-right" href="/login"><span class="glyphicon glyphicon-log-in"></span> 登陆 </a>
 		<a class="menu-right" href="/register"><span 	class="glyphicon glyphicon-edit"></span> 注册</a>
 	</div>
 	
