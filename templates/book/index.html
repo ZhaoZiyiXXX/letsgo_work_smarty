@@ -153,6 +153,11 @@ $(document).ready(function(){
 			return false;
 		}
 		
+		if(isNaN($('#newbook_fixedPrice').val()){
+			alert("定价请输入纯数字");
+			$('#newbook_fixedPrice').focus();
+			return false;
+		}
 		$.ajax({
 			type:"POST",
 			url:"{!$api_url!}"+"/book",
